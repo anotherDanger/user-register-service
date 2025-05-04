@@ -1,0 +1,28 @@
+services:
+  user_register_service:
+    image: user_register_service
+    container_name: user_register_service
+    environment:
+      - DB_USER=root
+      - DB_PASS=andhikad
+      - DB_HOST=user_register_service_db
+      - DB_POR=3306
+      - DB_NAME=user_service
+    networks:
+      - user_register_service_network
+    ports:
+      - 8081:8080
+  user_register_service_db:
+    image: mysql:latest
+    container_name: user_register_service_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=andhikad
+      - MYSQL_DATABASE=user_service
+    networks:
+      - user_register_service_network
+    volumes:
+      - user_register_service_volume:/var/lib/mysql
+networks:
+  user_register_service_network:
+volumes:
+  user_register_service_volume:
