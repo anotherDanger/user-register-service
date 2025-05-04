@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"strings"
 	"user_register_service/domain"
+	"user_register_service/helper"
 	"user_register_service/repository"
 	"user_register_service/web"
 )
@@ -38,6 +39,8 @@ func (svc *UserServiceImpl) Register(ctx context.Context, request *web.Request) 
 		log.Print(err)
 		return nil, err
 	}
+
+	helper.NewTx(tx, &err)
 
 	newReader := strings.NewReader(result.Username)
 
