@@ -1,15 +1,16 @@
 services:
   user_register_service:
-    image: user_register_service
-    container_name: user_register_service
+    image: user_service_baru
+    container_name: user_service_baru
     environment:
       - DB_USER=root
       - DB_PASS=andhikad
       - DB_HOST=user_register_service_db
-      - DB_POR=3306
+      - DB_PORT=3306
       - DB_NAME=user_service
     networks:
       - user_register_service_network
+      - all_services
     ports:
       - 8081:8080
   user_register_service_db:
@@ -24,5 +25,7 @@ services:
       - user_register_service_volume:/var/lib/mysql
 networks:
   user_register_service_network:
+  all_services:
+    external: true
 volumes:
   user_register_service_volume:

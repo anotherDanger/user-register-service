@@ -44,7 +44,7 @@ func (svc *UserServiceImpl) Register(ctx context.Context, request *web.Request) 
 
 	newReader := strings.NewReader(result.Username)
 
-	response, err := http.Post("http://localhost:8082/v1/auth", "application/json", newReader)
+	response, err := http.Post("http://auth_service:8080/v1/auth", "application/json", newReader)
 	if err != nil {
 		log.Print(err)
 		return nil, err
